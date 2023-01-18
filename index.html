@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="./alpine.js" referrerpolicy="origin"></script>
+    <link href="./tailwind.min.css" rel="stylesheet" />
+    <link href="./site-styles.css" rel="stylesheet" />
+    <link rel="stylesheet" href="./fa/css/fontawesome.min.css" />
+    <link rel="stylesheet" href="./fa/css/brands.css" />
+    <link rel="stylesheet" href="./fa/css/solid.css" />
+    <link rel="stylesheet" href="./fa/css/regular.css" />
+    <script src="./alpine.js"></script>
+  </head>
+
+  <body class="w-full">
+    <div
+      class="flex-0 lg:flex w-full divide-x divide-indigo-300 h-screen relative overflow-x-hidden"
+      x-data="{open:true}"
+    >
+      <nav
+        class="sticky top-0 left-0 bg-indigo-800 transition transition-all duration-1000 ease-in-out w-full lg:w-1/5 border-right border p-1 py-4 pb-6 space-y-2 z-10"
+      >
+        <div class="block lg:hidden w-full px-2 py-2 flex items-center">
+          <div class="w-full relative">
+            <div class="float-left text-lg text-indigo-100">
+              GreenBrooke ,inc.
+            </div>
+            <button
+              class="lg:hidden absolute right-0 top-0 text-indigo-100 border px-2 py-1 ring-0 outline-none focus:outline-none hover:outline-none focus:ring-0 outline-none focus:outline-none hover:outline-none"
+              onclick="toggleNavbar()"
+            >
+              <i class="fas fa-bars"></i>
+            </button>
+          </div>
+        </div>
+        <div class="hidden lg:block" id="navBar">
+          <ul class="w-full text-md space-y-4 pt-4 px-2">
+            <li class="w-full flex">
+              <a
+                href="#"
+                class="px-2 py-1 text-indigo-300 w-full hover:text-indigo-100"
+                ><i class="fas fa-chart-bar mr-2 text-xl icon"></i>Dashboard</a
+              >
+            </li>
+            <li class="w-full flex">
+              <a
+                href="#"
+                class="px-2 py-1 text-indigo-300 w-full hover:text-indigo-100"
+                ><i class="fas fa-upload mr-2 text-xl icon"></i> Upload</a
+              >
+            </li>
+            <li class="w-full flex">
+              <a
+                href="#"
+                class="px-2 py-1 text-indigo-300 w-full hover:text-indigo-100"
+                ><i class="fas fa-clipboard-list mr-2 text-xl icon"></i>
+                Orders</a
+              >
+            </li>
+            <li class="w-full flex">
+              <a
+                href="#"
+                class="px-2 py-1 text-indigo-300 w-full hover:text-indigo-100"
+                ><i class="fas fa-file-video mr-2 text-xl icon"></i>Media</a
+              >
+            </li>
+            <li class="w-full flex">
+              <a
+                href="#"
+                class="px-2 py-1 text-indigo-300 w-full hover:text-indigo-100"
+              >
+                <i class="fas fa-cloud-upload-alt mr-2 text-xl icon"></i
+                >Integrations
+              </a>
+            </li>
+          </ul>
+          <ul
+            class="w-full text-md space-y-4 pt-4 px-2 block md:hidden bottom-0"
+          >
+            <li class="w-full flex">
+              <a
+                href="#"
+                class="px-2 py-1 text-indigo-300 w-full hover:text-indigo-100"
+              >
+                <i class="fas fa-user-cog mr-2 text-xl icon"></i>Profile
+              </a>
+            </li>
+            <li class="w-full flex">
+              <a
+                href="#"
+                class="px-2 py-1 text-indigo-300 w-full hover:text-indigo-100"
+              >
+                <i class="fas fa-cog mr-2 text-xl icon"></i>Settings
+              </a>
+            </li>
+            <li class="w-full flex">
+              <a
+                href="#"
+                class="px-2 py-1 text-indigo-300 w-full hover:text-indigo-100"
+              >
+                <i class="fas fa-bell mr-2 text-xl icon"></i>Notifications
+              </a>
+            </li>
+            <li class="w-full flex">
+              <a
+                href="#"
+                class="px-2 py-1 text-indigo-300 w-full hover:text-indigo-100"
+                ><i class="fas fa-sign-out-alt mr-2 text-xl icon"></i> Logout</a
+              >
+            </li>
+          </ul>
+        </div>
+        <div
+          class="hidden lg:block absolute bottom-0 text-indigo-300 text-xs p-1 text-center w-full"
+        >
+          &copy; Rights reserved.
+        </div>
+      </nav>
+      <div class="relative w-full lg:w-4/5 h-full lg:h-screen overflow-none" id="mainColumn">
+        <main
+          class="w-full overflow-y-auto overflow-x-hidden bg-gray-100 h-full"
+          id="mainElement"
+        >
+        <div class="w-full sticky top-0">
+          <div
+            class="bg-gray-100 shadow w-full hidden lgblock"
+            id="searchNav"
+            style="z-index: 500"
+          >
+            <div class="grid grid-cols-6 w-full pl-10 pr-6">
+              <div class="col-span-5 relative flex items-center">
+                <input
+                  type="text"
+                  class="border border-indigo-100 rounded-full pl-12 px-6 py-1 bg-gray-00 focus:bg-white text-md ring-0 outline-none shadow-inner shadow-sm"
+                />
+                <button
+                  class="absolute left-12 ml-3 mt-1 ring-0 focus:ring-0 outline-none focus:outline-none"
+                >
+                  <i class="fas fa-search text-indigo-500 text-xl"></i>
+                </button>
+              </div>
+
+              <div class="col-span-1">
+                <ul class="flex space-x-4 items-center py-1">
+                  <li>
+                    <a
+                      href="#"
+                      class="text-indigo-500 hover:text-indigo-700"
+                      id="notificationTrigger"
+                    >
+                      <i class="fas fa-bell text-xl"></i>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" class="text-gray-600 hover:text-gray-700">
+                      <i class="fas fa-cog text-xl"></i>
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="#"
+                      class="text-gray-600 hover:text-gray-900"
+                      id="profileTrigger"
+                    >
+                      <i class="fas fa-user-circle text-4xl"></i>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div
+              class="shadow shadow-md rounded hidden absolute bg-white border"
+              style="width: 140px"
+              id="profileTarget"
+            >
+              <ul class="space-y-2 w-full text-sm" style="width: 100%">
+                <li class="flex">
+                  <a
+                    href="#"
+                    class="py-2 px-2 w-full mx-0 hover:bg-gray-200 text-gray-600 hover:text-gray-900"
+                    ><i class="fas fa-home mr-2"></i>Dashboard</a
+                  >
+                </li>
+                <li class="flex">
+                  <a
+                    href="#"
+                    class="py-2 px-2 w-full mx-0 hover:bg-gray-200 text-gray-600 hover:text-gray-900"
+                    ><i class="fas fa-user-cog mr-2"></i>Profile</a
+                  >
+                </li>
+                <li class="flex">
+                  <a
+                    href="#"
+                    class="py-2 px-2 w-full mx-0 hover:bg-gray-200 text-gray-600 hover:text-gray-900"
+                    ><i class="fas fa-sign-out-alt mr-2"></i>Sign out</a
+                  >
+                </li>
+              </ul>
+            </div>
+            <div
+              class="shadow shadow-md rounded hidden absolute bg-white border"
+              style="width: 140px"
+              id="notificationTarget"
+            >
+              <ul class="w-full text-sm font-semibold" style="width: 100%">
+                <li class="hidden px-1 pb-1 py-2 font-semibold">
+                  notifications
+                </li>
+                <li class="flex">
+                  <a
+                    href="#"
+                    class="py-2 px-2 w-full mx-0 bg-green-100 text-green-800 hover:text-green-900"
+                    >Read
+                    <span
+                      class="relative rounded-full bg-green-900 items-center ml-2"
+                    >
+                      <span class="text-white text-sm p-2"> 4 </span>
+                    </span>
+                  </a>
+                </li>
+                <li class="flex">
+                  <a
+                    href="#"
+                    class="py-2 px-2 w-full mx-0 bg-yellow-100 text-yellow-600 hover:text-yellow-700"
+                    >Unread
+                    <span
+                      class="relative rounded-full bg-yellow-900 items-center ml-2"
+                    >
+                      <span class="text-white text-sm p-2"> 7 </span>
+                    </span>
+                  </a>
+                </li>
+                <li class="flex">
+                  <a
+                    href="#"
+                    class="py-2 px-2 w-full mx-0 bg-blue-100 text-blue-600 hover:text-blue-900"
+                    >! Important
+                    <span
+                      class="relative rounded-full bg-blue-900 items-center ml-2"
+                    >
+                      <span class="text-white text-sm p-2"> 2 </span>
+                    </span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+          <div class="pb-6 pt-6">
+            <h1 class="px-4 text-xl font-extrabold leading-tight text-gray-600">
+              <span id="topHeading"
+                ><i class="fas fa-plus-circle pr-2"></i>Projects</span
+              >
+            </h1>
+            <div
+              class="mx-4 bg-gray-600 mt-2"
+              style="padding: 1px"
+              id="topHeadingUnderline"
+            ></div>
+          </div>
+          <div class="px-2 lg:px-12 pt-8 hidden">
+            <div
+              class="w-full rounded grid grid-cols-3 divide-x-2 border shadow shadow-md"
+            >
+              <div
+                class="bg-gray-600 text-indigo-100 shadow-xl text-center col-span-1 relative items-center rounded-l"
+                id="step1"
+              >
+                <p class="py-2 text-md">
+                  <span>Upload Files</span>
+                  <i class="fas fa-cloud-upload-alt ml-2"></i>
+                </p>
+              </div>
+              <div
+                class="text-gray-600 bg-gray-100 text-center col-span-1 relative items-center"
+                id="step2"
+              >
+                <p class="py-2 text-md">
+                  <span>Add details</span>
+                  <i class="fas fa-edit ml-2"></i>
+                </p>
+              </div>
+              <div
+                class="text-gray-600 bg-gray-100 text-center col-span-1 relative items-center rounded-r"
+                id="step3"
+              >
+                <p class="py-2 text-md">
+                  <span>Submit</span>
+                  <i class="fas fa-location-arrow ml-2"></i>
+                </p>
+              </div>
+            </div>
+          </div>
+          <div x-data="{stage:step}" id="wizardBody">
+            <div class="w-full px-2 lg:px-8 pt-8" x-cloak x-show="stage == 1">
+              <div class="w-full flex-0 lg:flex">
+                <div class="block md:hidden h-">
+                  <div class="items-center py-6 px-4 bg-gray-300">
+                    <input
+                      type="file"
+                      id="normalUpload"
+                      class="hidden"
+                      multiple
+                    />
+                    <button
+                      class="shadow shadow-md w-full p-2 rounded bg-gray-700 focus:bg-gray-800 outline-none focus:outline-none hover:outline-none focus:ring-0 focus:shadow-outline text-gray-100"
+                      onclick="clickUpload()"
+                    >
+                      <i class="fas fa-plus-circle mr-2"></i>add files
+                    </button>
+                  </div>
+                </div>
+                <div class="my-8 w-full px-4 bg-gray-00">
+                  <div
+                    class="hidden md:block w-full py-24 bg-gray-300 shadow-inner shadow-lg rounded-md flex items-center border-indigo-700"
+                    id="dropWell"
+                  >
+                    <div
+                      class="w-full text-2xl font-semibold leading-tight text-gray-800"
+                    >
+                      <p class="text-center text-gray-600">
+                        <i class="fas fa-cloud-upload-alt text-4xl"></i>
+                      </p>
+                      <p class="text-center text-gray-700">
+                        Drag and drop files here
+                      </p>
+                      <p class="text-center">
+                        or <br /><button
+                          class="text-sm shadow focus:shadow-inner shadow-md focus:ring-0 outline-none focus:outline-none hover:outline-none bg-gray-700 hover:bg-gray-800 text-gray-100 px-2 py-1 rounded mt-2"
+                          onclick="clickUpload()"
+                        >
+                          <i class="fas fa-upload mr-2"></i>upload files
+                        </button>
+                      </p>
+                    </div>
+                  </div>
+                  <div class="pt-4 w-full">
+                    <input
+                      type="url"
+                      name="url"
+                      placeholder="Add a link/url. Press Enter key to add."
+                      class="placeholder-gray-500 text-gray-900 bg-gray-100 focus:bg-white p-2 rounded w-full border outline-none focus:outline-none hover:outline-none"
+                      id="urlInput"
+                    />
+                  </div>
+                  <div
+                    class="pt-4"
+                    x-data="{urls:objectsDatabase.syncURLs()}"
+                    class="w-full transition transition-all duration-1000 ease-in-out"
+                    id="URLArea"
+                  >
+                    <template x-for="url in urls">
+                      <div>
+                        <button
+                          class="w-full bg-indigo-500 hover:bg-indigo-600 outline-none focus:outline-none hover:outline-none focus:ring-0 text-indigo-100 py-1 px-2 rounded text-sm items-center"
+                          :value="url.value"
+                          @click="removeURL(url)"
+                        >
+                          <span
+                            x-text="sliceString(url.value,100)"
+                            class="text-xs float-left"
+                          ></span>
+                          <i class="fas fa-times text-xs float-right py-1"></i>
+                        </button>
+                      </div>
+                    </template>
+                  </div>
+                </div>
+                <div
+                  class="w-full lg:w-1/4 px-4 lg:px-1 hidden my-8"
+                  id="uploadResult"
+                >
+                  <h3 class="text-base sr-only text-gray-900 mb-2">
+                    Uploaded files
+                  </h3>
+                  <div
+                    class="w-full space-y-1 transition transition-all duration-1000 ease-in-out"
+                    x-data="{files:objectsDatabase.syncFiles()}"
+                    id="filesList"
+                  >
+                    <template x-for="file in files" :key="file">
+                      <div>
+                        <button
+                          class="w-full bg-indigo-500 lg:bg-blue-500 hover:bg-blue-600 outline-none focus:outline-none hover:outline-none focus:ring-0 text-gray-100 py-1 px-2 rounded text-sm items-center"
+                          :value="file"
+                          @click="removeFile(file)"
+                        >
+                          <span
+                            x-text="file.slice(0,17)+'...'"
+                            class="text-xs float-left"
+                          ></span>
+                          <i class="fas fa-times text-xs float-right py-1"></i>
+                        </button>
+                      </div>
+                    </template>
+                  </div>
+                </div>
+              </div>
+              <div class="w-full px-4">
+                <div class="w-full pt-3 lg:pt-4">
+                  <button
+                    class="nextButton bg-indigo-500 hover:bg-indigo-600 focus:bg-indigo-600 outline-none focus:outline-none hover:outline-none focus:ring-0 text-indigo-100 py-1 px-6 rounded shadow focus:shadow-inner shadow-xl hidden"
+                    id="nextButton"
+                    onclick="nextStage()"
+                  >
+                    Next<i class="fas fa-arrow-alt-circle-right ml-2"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div
+              class="w-full flex-0 lg:flex px-2 lg:px-8 pt-8"
+              x-cloak
+              x-show="stage == 2"
+              :class="{'hidden':stage!=2}"
+            >
+              <div class="w-full items-center" x-data="{tab:1}">
+                <div
+                  class="border bg-gray-200 shadow shadow-md w-full grid grid-cols-3 rounded text-gray-800 border-gray-500 divide-x divide-gray-500"
+                >
+                  <button
+                    class="outline-none focus:outline-none hover:outline-none items-center justify-center col-span-1 p-2 rounded-tl text-gray-500 text-sm lg:text-base"
+                    @click="tab=1;setGrouper()"
+                    :class="{'bg-white text-gray-800':tab==1}"
+                  >
+                    <i class="fas fa-object-ungroup"></i> Group files/URLs
+                  </button>
+                  <button
+                    class="outline-none focus:outline-none hover:outline-none items-center justify-center col-span-1 p-2 rounded-tl text-gray-500 text-sm lg:text-base"
+                    @click="tab=3;setUngrouper()"
+                    :class="{'bg-white text-gray-800':tab==3}"
+                  >
+                    <i class="fas fa-object-group"></i> unGroup files/URLs
+                  </button>
+                  <button
+                    class="outline-none focus:outline-none hover:outline-none items-center justify-center col-span-1 p-2 rounded-tr text-gray-500 text-sm lg:text-base"
+                    @click="tab=2;setProcessor()"
+                    :class="{'bg-white text-gray-700 shadow':tab==2}"
+                  >
+                    <i class="fas fa-edit"></i> Add file/URL details
+                  </button>
+                </div>
+                <div class="pt-6" x-show="tab==1" x-cloak>
+                  <div
+                    class="w-full space-y-2"
+                    x-data="{files:objectsDatabase.syncRaw()}"
+                    id="fileGrouper"
+                  >
+                    <template x-for="file in files" :key="file">
+                      <div class="w-full shadow items-center">
+                        <button
+                          class="w-full bg-gray-200 text-gray-800 border border-gray-500 focus:border-indigo-400 rounded p-2 text-left outline-none focus:outline-none hover:outline-none"
+                          x-on:click="selectItem(file)"
+                        >
+                          <input
+                            type="checkbox"
+                            :name="file"
+                            :id="file"
+                            class="hidden"
+                          />
+                          <span
+                            class="mr-2 lg:mr-4 fas fa-circle text-xl"
+                            id="checkIcon"
+                          >
+                          </span>
+                          <span x-text="file"></span>
+                        </button>
+                      </div>
+                    </template>
+                  </div>
+                  <template x-if="true">
+                    <div class="w-full flex gap-3">
+                      <button
+                        class="w-full md:w-2/3 lg:w-1/5 mt-6 border text-gray-100 py-1 text-center rounded bg-gray-800 outline-none focus:outline-none hover:outline-none"
+                        onclick="groupObjects()"
+                        id="groupFilesButton"
+                      >
+                        <i class="fas fa-layer-group mr-2"></i>Group
+                      </button>
+                      <button
+                        class="w-full md:w-2/3 lg:w-1/5 mt-6 border text-gray-100 py-1 text-center rounded bg-gray-800 outline-none focus:outline-none hover:outline-none"
+                        onclick="previousStage()"
+                        id="groupFilesButton"
+                      >
+                        <i class="fas fa-plus-circle mr-2"></i>Add files/URLs
+                      </button>
+                    </div>
+                  </template>
+                </div>
+                <div class="pt-6" x-show="tab==3" x-cloak>
+                  <div
+                    class="w-full space-y-2"
+                    x-data="{files:objectsDatabase.grouped}"
+                    id="fileUngrouper"
+                  >
+                    <template x-for="file in files" :key="file">
+                      <div class="w-full shadow items-center">
+                        <button
+                          class="w-full bg-gray-200 text-gray-800 border border-gray-500 focus:border-indigo-400 rounded p-2 text-left outline-none focus:outline-none hover:outline-none"
+                          onclick="unGroupObjects()"
+                          :data="file"
+                        >
+                          <input
+                            type="checkbox"
+                            :name="file"
+                            :id="file"
+                            class="hidden"
+                          />
+
+                          <i
+                            class="mr-2 lg:mr-4 fas fa-layer-ungroup text-xl"
+                          ></i>
+                          <span x-text="file"></span>
+                        </button>
+                      </div>
+                    </template>
+                    <template x-if="files.length===0">
+                      <div class="'items-center">Nothing to ungroup</div>
+                    </template>
+                  </div>
+                </div>
+                <div class="pt-6" x-show="tab==2" x-cloak>
+                  <form class="w-full" name="editDetails">
+                    <div
+                      class="w-full items-center shadow p-2 lg:p-4 mb-6 text-sm lg:text-base"
+                      x-data="{groups:objectsDatabase.syncList()}"
+                      id="itemsList"
+                    >
+                      <div class="w-full md:w-1/3 mx-auto">
+                        <h2
+                          class="mb-2 text-center font-semibol text-gray-600 mt-4"
+                        >
+                          Select file/URL
+                        </h2>
+                        <select
+                          name="item"
+                          id="item"
+                          class="w-full text-center p-2 rounded outline-none focus:outline-none hover:outline-none shadow focus:shadow-inner shadow-lg"
+                          required
+                        >
+                          <template x-for="group in groups">
+                            <option :value="group" :title="group" class="p-2">
+                              <span x-text="group"></span>
+                            </option>
+                          </template>
+                        </select>
+                      </div>
+                      <div class="w-full grid grid-cols-2 pt-10 gap-4">
+                        <div
+                          class="select-none col-span-2 md:col-span-1 border focus:border-gray-200 bg-indigo-800 text-white shadow p-4 rounded-md"
+                        >
+                          <h3 class="text-sm uppercase text-center pb-4">
+                            Deadline
+                          </h3>
+                          <div class="grid grid-cols-2">
+                            <div class="col-span-2 md:col-span-1 px-1 lg:px-2">
+                              <label for="date">Day:</label>
+                              <input
+                                type="date"
+                                name="date"
+                                class="select-none p-2 mt-2 w-full text-indigo-600 bg-indigo-100 border shadow focus:shadow-inner outline-none focus:outline-none hover:outline-none rounded"
+                                id="date"
+                                required
+                              />
+                            </div>
+                            <div class="col-span-2 md:col-span-1 px-1 lg:px-2">
+                              <label for="time">Time:</label>
+                              <input
+                                type="time"
+                                name="time"
+                                class="select-none  p-2 mt-2 w-full text-indigo-600 bg-indigo-100 border shadow focus:shadow-inner outline-none focus:outline-none hover:outline-none rounded"
+                                id="time"
+                                required
+                              />
+                            </div>
+                          </div>
+                        </div>
+                        <div
+                          class=" select-none col-span-2 md:col-span-1 border focus:border-gray-200 bg-indigo-800 text-white shadow p-4 rounded-md"
+                        >
+                          <h3 class="text-sm uppercase text-center pb-4">
+                            Format
+                          </h3>
+                          <div class="grid grid-cols-2">
+                            <div class="col-span-2 md:col-span-1 px-1 lg:px-2">
+                              <label for="timestamps">Timestamps</label>
+                              <select
+                                name="timestamps"
+                                id="timestamps"
+                                class="p-2 w-full border shadow focus:shadow-inner mt-2 outline-none focus:outline-none hover:outline-none rounded text-gray-800"
+                                required
+                              >
+                                <option value="">Timestamps</option>
+                                <option value="30s">30 seconds</option>
+                                <option value="1m">1 minute</option>
+                                <option value="2m">2 minutes</option>
+                                <option value="5m">5 minutes</option>
+                              </select>
+                            </div>
+                            <div class="col-span-2 md:col-span-1 px-1 lg:px-2">
+                              <label for="format">Verbatim format </label>
+                              <select
+                                name="format"
+                                id="format"
+                                class="p-2 w-full border shadow focus:shadow-inner mt-2 outline-none focus:outline-none hover:outline-none rounded text-gray-800"
+                                required
+                              >
+                                <option value="">Format</option>
+                                <option value="verbatim">verbatim</option>
+                                <option value="non-verbatim">
+                                  Non-verbatim
+                                </option>
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="w-full grid grid-cols-4 mt-4 gap-4">
+                        <div
+                          class="col-span-4 md:col-span-1 shadow p-4 rounded space-y-4 py-6"
+                        >
+                          <label
+                            for="language"
+                            class="text-gray-700 font-semibold text-sm px-2 hidden"
+                            >Language:</label
+                          >
+                          <select
+                            name="language"
+                            id="language"
+                            class="p-2 w-full border shadow focus:shadow-inner mt-2 outline-none focus:outline-none hover:outline-none rounded text-gray-800"
+                            required
+                          >
+                            <option value="">Language</option>
+                            <option value="en_BR">English (UK)</option>
+                            <option value="en_US">English (USA)</option>
+                          </select>
+                          <select
+                            name="service"
+                            id="service"
+                            class="p-2 w-full border shadow focus:shadow-inner mt-2 outline-none focus:outline-none hover:outline-none rounded text-gray-800"
+                            required
+                          >
+                            <option>Service</option>
+                            <option value="TR">Transcription (TR)</option>
+                            <option value="CC">Closed Captioning (CC)</option>
+                            <option value="ST">Subtitling (ST)</option>
+                            <option value="I_TR">Intergrated TR (I-TR)</option>
+                          </select>
+                        </div>
+                        <div
+                          class="col-span-4 md:col-span-3 shadow-inner border rounded"
+                        >
+                          <textarea
+                            class="w-full h-full outline-none focus:outline-none hover:outline-none rounded p-2 resize-none text-gray-700"
+                            placeholder="Add special instructions here"
+                            id="instructions"
+                            required
+                          ></textarea>
+                        </div>
+                      </div>
+                      <div class="w-full py-8">
+                        <button
+                          class="w-full md:w-1/3 lg:w-1/4 bg-indigo-500 outline-none focus:outline-none hover:outline-none shadow shadow-lg text-indigo-100 p-2 rounded"
+                          onclick="processData()"
+                          type="submit"
+                        >
+                          <i class="fas fa-save mr-2"></i>Save
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+            <div
+              class="w-full flex-0 lg:flex px-2 lg:px-8 pt-8 bg-gray-200 md:bg-transparent"
+              x-cloak
+              x-show="stage == 3"
+            >
+              <div class="px-2">
+                <h2 class="text-xl font-semibold text-gray-600 pb-4 w-full">
+                  <i class="fas fa-clipboard-list mr-2"></i>Preview
+                </h2>
+                <div x-data="{objects:dataStep3}" id="preview">
+                  <div class="border-collapse mb-6">
+                    <div class="gap-4 grid grid-cols-2 w-full">
+                      <template x-for="object in objects" :key="object">
+                        <div
+                          class="relative shadow rounded-md bg-white text-gray-700 text-sm border border-gray-200 col-span-2 md:col-span-1 shadow flex-wrap"
+                          :id="'objectId'+sliceString(object.item.name)"
+                          onmouseenter="showRevertButton()"
+                          onmouseleave="hideRevertButton()"
+                        >
+                          <div
+                            class="absolute top-0 left-0 w-full h-full hidden border rounded"
+                            :id="'buttonId'+sliceString(object.item.name)"
+                            style="
+                              background-color: rgba(76, 0, 130, 0.027);
+                              border-color: rgba(76, 0, 130, 0.363);
+                            "
+                          >
+                            <div class="items-center h-full flex">
+                              <button
+                                class="text-indigo-100 bg-indigo-600 px-2 py-1 mx-auto rounded"
+                                :data="objects.indexOf(object)"
+                                onclick="revertObject()"
+                              >
+                                <i class="fas fa-edit mr-2"></i> Edit
+                              </button>
+                            </div>
+                          </div>
+                          <div class="px-4 py-2 w-full rounded-t pt-5">
+                            <span class="far fa-file mr-2"></span>
+                            <span
+                              x-text="sliceFilename(object.item.name,35)"
+                            ></span>
+                          </div>
+                          <div
+                            class="px-2 py-2 grid grid-cols-2 gap-2 lg:gap-0"
+                          >
+                            <div class="col-span-2 lg:col-span-1 flex">
+                              <div class="float-left px-2">
+                                <span class="fas fa-language mr-2"></span>
+                              </div>
+                              <div class="">
+                                <p>
+                                  <i
+                                    class="font-semibold text00"
+                                    x-text="parseLanguage(object.data.language)"
+                                  ></i>
+                                </p>
+                              </div>
+                            </div>
+                            <div class="col-span-2 lg:col-span-1 flex">
+                              <div class="px-2 font-semibold">
+                                <p>
+                                  <span
+                                    x-text="parseService(object.data.service)"
+                                  ></span>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                          <div
+                            class="px-2 py-2 grid grid-cols-2 gap-2 lg:gap-0"
+                          >
+                            <div
+                              class="col-span-2 lg:col-span-1 flex md:flex-0"
+                            >
+                              <div
+                                class="px-2"
+                                :title="'Timestamping every' + parseTimestamps(object.data.timestamps)"
+                              >
+                                <span class="far fa-clock mr-2"></span
+                                ><span class="lg:hidden">Timestamps</span> every
+                              </div>
+                              <div class="">
+                                <p>
+                                  <span
+                                    class="m"
+                                    x-text="parseTimestamps(object.data.timestamps)"
+                                  ></span>
+                                </p>
+                              </div>
+                            </div>
+                            <div class="col-span-2 lg:col-span-1 flex">
+                              <div class="px-2">
+                                <p>
+                                  <span x-text="object.data.format"></span>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="px-4 py-2 w-full">
+                            <span
+                              class="font-semibold tracking-tight text-gray-700"
+                            >
+                              Deadline:</span
+                            >
+                            <span
+                              x-text="parseDate(object.data.date,object.data.time)"
+                            ></span>
+                          </div>
+                          <div class="p-1">
+                            <div
+                              class="px-2 py-3 w-full rounded text-gray-700 tracking-tight rounded-b h-auto"
+                            >
+                              <span
+                                x-text="sliceString(object.data.instructions,100)"
+                              ></span>
+                            </div>
+                          </div>
+                        </div>
+                      </template>
+                    </div>
+                    <div class="w-full pt-6">
+                      <button
+                        class="bg-indigo-500 hover:bg-white border hover:border-indigo-700 text-indigo-100 hover:text-indigo-700 px-2 py-2 lg:py-1 text-sm shadow focus:shadow-inner shadow-md outline-none focus:outline-none hover:outline-none w-1/2 md:w-1/3 lg:w-1/6 items-center rounded"
+                      >
+                        <div class="float-left">
+                          <i class="fas fa-check-circle floa-left"></i>
+                        </div>
+                        <div class="">Finish</div>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
+        <div
+          class="absolute hidden w-40 text-xs rounded p-1 text-center text-white bg-gray-900"
+          id="popOver"
+          style="z-index: 1200"
+        ></div>
+        <div
+          class="block md:hidden text-gray-800 bg-gray-300 text-xs font-semibold p-1 text-center w-full"
+        >
+          &copy; Rights reserved.
+        </div>
+      </div>
+    </div>
+  </body>
+  <script src="./uploadWizard.js" rel="text/javascript" defer></script>
+</html>
